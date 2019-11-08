@@ -1,0 +1,375 @@
+
+参考链接：https://www.cnblogs.com/xinaixia/p/8279015.html
+
+全模块所在路径和缓存路径放node.js安装的文件夹中，则在我的安装目录下创建两个文件夹【node_global】及【node_cache】
+npm config set prefix "D:\SDE\Node8.9.4\node_global"
+D:\Program Files\nodejs\node_global
+
+npm config set cache "D:\SDE\Node8.9.4\node_cache"
+D:\Program Files\nodejs\node_cache
+
+安装最常用的express模块，打开cmd窗口，输入如下命令进行模块的全局安装：
+npm install express -g # -g是全局安装的意思
+
+使用express创建一个工程，输入命令：express helloworld
+
+转到 helloworld 目录下，命令：cd helloworld
+
+装载 node 包管理器，执行命令：npm install
+
+启动 helloworld，输入命令：npm start，
+新创建的 helloworld 已经运行在3000端口上在浏览器中输入地址：http://localhost:3000/
+
+
+======================================上传多个文件=========================
+
+multiple//input type="file" 上传多个文件
+accept//input type="file"设置选择文件的类型
+
+============================================================================
+
+&&的用法
+callback&&callback(data);
+
+移动端的轮播图滑动效果
+
+====================================俩栏自适应==========================================
+两格布局 俩栏自适应：
+1.一个盒子float，另一个盒子overflow：hidden
+2.注意：一定要让浮动的元素先解析
+
+
+
+=======================================文本溢出时不显示省略标记===================================
+text-overflow属性
+作用：设定内容溢出状态下的文本处理方式。
+取值：
+clip： 默认值
+	当对象内文本溢出时不显示省略标记（...），而是将	溢出的部分裁切掉。
+ellipsis：
+	 当对象内文本溢出时显示省略标记（...）。 
+
+注意:该属性需要和over-flow:hidden属性(超出处理)还有white-space:nowrap(禁止换行)配合使用，否则无法看到效果
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+
+移动端
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+
+=============================================point-events：none===================================
+样式属性：
+point-events：none
+
+使用场景：在放大镜案例中，为box添加鼠标移动事件，给遮罩层设置left和top 使鼠标永远在遮罩层中间，
+而在获取鼠标的移动时的坐标时（使用jquery中offsetX，offsetY系列），鼠标位置不准确
+解决方式：为遮罩层添加样式point-events：none
+
+pointer-events: none; //如同disabled 属性，可以实现事件的完全禁用。如果其他标签需要类似的禁用效果
+这个链接，你是点不了的，并且 hover 也没有效果。
+（值得一提的是，仅仅是鼠标事件失效，用 tab 键还是可以选中该链接的，
+然后 enter 打开，这个时候可以去掉 a 标签的 href 属性，就不能让 tab 键选中了）
+
+
+==================================================字体图标=====================================
+字体图标：
+@font-face{
+font-family: "wjs";
+src: url(../fonts/MiFie-Web-Font.eot) format("embedded-opentype");
+src: url(../fonts/MiFie-Web-Font.svg) format("svg");
+src: url(../fonts/MiFie-Web-Font.ttf) format("truetype");
+src: url(../fonts/MiFie-Web-Font.woff) format("woff");
+}
+wjs_icon{font-family: wjs; }
+通过伪类来定义一个字体图标，字体图标设计出来的时候一般都会有文档参考
+wjs_icon_phone:before{
+	content: "\e908";
+}
+
+
+==========================================塌陷================================================
+问题描述：
+父盒子：定位 padding
+子盒子：width 100% hight:100%
+子盒子的子盒子设置margin或padding导致塌陷
+解决：
+方式一：子盒子加border：1px solid #000
+方式二：在子盒子并集的添加内容
+
+
+==============数组去重=======================
+
+https://www.cnblogs.com/wisewrong/p/9642264.html
+
+=========================================================
+
+做动画时
+当right的值受到left值影响 设置left:auto
+
+
+===========================改变this指向=====================================
+
+
+①函数名.apply(对象，[方法的参数1，方法的参数2....])-----修改的同时调用了函数
+f1.apply(obj,[1,3]);
+
+②函数名.call(对象，方法的参数1，方法的参数2....)-----修改的同时调用了函数
+f1.call(obj,1,2);
+
+③函数名.bind(对象，参数1，参数2)----修改了this指向，函数没有被调用，将会返回结果保存之后，再调用
+var ff=f1.bind(obj,1,2);
+ff();
+
+=================================Jquery并不支持在animate的样式中的transform==========================
+
+
+Jquery并不支持在animate的样式中的transform效果，这里通过使用animate的回调函数来实现。
+
+
+$($sub).animate({},5000,function(){
+    $(this).css({'transform':'translateX(300px)'});
+})
+
+
+
+======================sessionStorage  localStorage  和cookie之间的区别===================================================
+
+特性
+  
+	- 设置、读取方便
+  
+	- 容量较大，sessionStorage约5M、localStorage约20M
+  
+	- 只能存储字符串，可以将对象JSON.stringify() 编码后存储
+
+
+window.sessionStorage
+  
+	- 生命周期为关闭浏览器窗口
+  - 在同一个窗口(页面)下数据可以共享
+
+
+window.localStorage
+  
+	- 永久生效，除非手动删除（服务器方式访问然后清除缓存）
+ 
+	- 可以多窗口（页面）共享
+
+
+方法
+  
+	- setItem(key, value) 设置存储内容
+  
+	- getItem(key) 读取存储内容
+  
+	- removeItem(key) 删除键值为key的存储内容
+ 
+	- clear() 清空所有存储内容
+
+
+
+
+本地缓存：
+localStorage.setItem('key',json字符串)
+localStorage.getItem('key')
+localStorage.removeItem('key')
+
+cookie：用于存储页面的用户信息：记住用户名，保存用户登录的状态
+特征：
+1.同一个网站共享一套cookie
+2.大小有限，一般都是4kb，只能存文本
+3.必须要通过本地服务器来预览，不能以file的形式
+4.分为临时cookie和设置过期时间的coolie
+
+
+语法：
+存在文档里 临时cookie document.cookie='key=value';
+创建过期时间的cookie document.cookie='username=小明;expires=到期时间';
+
+
+浏览器查看cookie  设置--高级--网站设置--Cookie--查看所有 Cookie 和网站数据--搜索localhost
+
+
+
+
+
+共同点：都是保存在浏览器端，且同源的
+
+区别：
+
+1、cookie数据自始至终在同源的http请求中携带，即cookie在浏览器和服务器间来回传递，
+   而sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。
+   cookie数据还有路径的概念，可以限制cookie只属于某个路径下。
+
+2、存储大小限制也不同，cookie数据不能超过4K，同时每次http请求都会携带cookie，
+   所以cookie只适合保存很小的数据，如会话标识，sessionStorage(4kb)和localStorage(20kb)虽
+   然也有存储大小的限制，但比cookie大得多，可以达到5M或者更大。
+
+3、数据有效期不同，sessionStorage仅在当前浏览器窗口关闭前有效，自然也就不可能持久保持
+
+　　localStorage始终有效，窗口或浏览器关闭也一直保存，因此用作持久数据；cookie只在设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
+
+4、作用域不同，sessionStorage不在不同的浏览器窗口中共享，即使是同一个页面；localStorage在所有同源窗口中都是共享的，cookie也是在所有同源窗口中都是共享的
+
+5、WEB Storage支持事件通知机制，可以将数据更新的通知发送给监听者
+
+6、WEB Storage的api接口使用更方便
+
+
+
+===========================================获取url中？之后的参数,以对象返回=========================================
+
+var getParams=function () {
+    // 1.页面在初始化时关键字在输入框
+    var search=location.search;//?key=4&id=1
+    var params={};
+    if (search){
+        search=search.replace('?','');//①去掉？
+        var  searchArr= search.split('&');//②把&分割，返回以数组的形式返回分割后的数据
+        //["key=4","id=1"]
+        searchArr.forEach(function (item,i) {
+            var arr=item.split('=');
+            params[arr[0]]=arr[1];
+        });
+        return params;
+    }
+}
+
+
+function getQueryString(name){
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null) return  unescape(r[2]); //函数可对通过 escape() 编码的字符串进行解码
+	return null;
+}
+
+// 调用方法
+alert(getQueryString("参数名1"));
+alert(getQueryString("参数名2"));
+alert(getQueryString("参数名3"));
+==========================================================================================================
+
+
+URL的格式是协议://主机名.公司名称.机构类型.地域类型:端口/路径，
+如http://www.zhangguo.com.cn:8080/products/list.do?id=1#a1 
+
+
+跨域资源共享（CORS）
+
+CORS与JSONP相比:
+1、 JSONP只能实现GET请求，而CORS支持所有类型的HTTP请求。
+2、 使用CORS，开发者可以使用普通的XMLHttpRequest发起请求和获得数据，比起JSONP有更好的错误处理。
+3、 JSONP主要被老的浏览器支持，它们往往不支持CORS，而绝大多数现代浏览器都已经支持了CORS。
+
+CORS 将请求分为两类：简单请求和非简单请求：
+
+简单请求的部分响应头及解释如下：
+
+Access-Control-Allow-Origin（必含）- 不可省略，否则请求按失败处理。
+该项控制数据的可见范围，如果希望数据对任何人都可见，可以填写"*"。
+
+服务器端
+ protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //设置允许CORS的域名，如果是所有则使用*
+        response.addHeader("Access-Control-Allow-Origin","*");
+        response.getWriter().write("{\"name\":\"Book\"}");
+    }
+
+客户端
+<script type="text/javascript">
+            //跨域Get请求
+            $.get("http://localhost:8080/mvc08/pdt", function(data) {
+                console.log("Get："+data.name);
+            }, "json");
+            
+            //跨域Post请求
+            $.post("http://localhost:8080/mvc08/pdt", function(data) {
+                console.log("Post："+data.name);
+            }, "json");
+</script>
+
+===============================================================
+jquery学习总结：
+https://www.cnblogs.com/best/p/9097376.html
+
+
+=======================================常用方法================================================
+
+
+indexof()-----判断数据在数组中的位置
+split()-------分割字符串，返回以数组的形式返回分割后的数据
+replace('?','')------使用replace去掉？ 得到key=4&id=1
+total.toFixed(2)-----保留小数后两位
+
+decodeURI(data);//解码为中文
+
+
+ var data = $('form').serialize();---缺点：不将数据两端的空格去除
+
+
+
+======================================事件绑定触发多次========================================================
+
+当一个按钮绑定触发事件时，第一次点击触发一次，第二次点击触发两次，第三次点击触发三次
+
+出现原因：事件在绑定过程中的一个垃圾机制
+
+解决：在事件绑定之前进行解绑
+
+==============================================原型链===========================================================
+什么是原型链？
+每一个对象都有一个原型__proto__，这个原型还有它自己的原型，依次类推，形成了一个原型链
+
+prototype和__proto的区别：
+1. prototype属性是函数所独有的，在定义构造函数时自动创建，总是被__proto__所指
+2. 所有对象都有__proto__，是原型链查询中实际用到的，它总是指向prototype属性
+
+构造函数、原型对象、实例对象之间的关系：
+
+构造函数.prototype = 原型对象
+原型对象.constructor = 构造函数
+实例对象.constructor = 构造函数
+
+
+=========================================this的理解=========================================================
+
+this是谁和函数在哪定义的和在哪执行的没有任何关系
+
+1. 函数执行，看函数名前面是否有".",有的话，"."前面是谁，this就是谁；没有的话，this就是window;和函数在哪执行没有关系
+2.自执行函数中的this永远是window
+3.给元素的某个事件绑定方法，当事件触发时，执行对应的方法，方法中的this指向当前的元素
+4. 在构造函数中，this指向的是当前类的实例
+5. 使用call/apply来改变this的指向会覆盖以上的所有 this 的原有指向
+6.ES6里面的箭头函数没有自己的this，所以他的上一层作用域的this指向谁，就指向谁
+
+
+当然上面是在非严格模式下，
+
+如果在严格模式下：'use strict'
+1.自调用函数的 this 永远是 undefined
+2.方法执行时，谁调用 this 就指向谁，没有调用者，this 就指向 undefined
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
